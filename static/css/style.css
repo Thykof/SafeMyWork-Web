@@ -98,7 +98,7 @@ section div {
 }
 
 #s-advantage {
-  background-color: #51d5e6;
+  background: linear-gradient(to bottom, #51d5e6 0%, aquamarine 100%);
   padding: 0 0 20px;
 }
 
@@ -108,12 +108,17 @@ section div {
   padding: 70px;
 }
 
-#d-advantage h2 {
+h2 {
   font-size: 1.5em;
+}
+
+#s-account {
+  background: linear-gradient(to bottom, aquamarine 0%, #51d5e6 100%);
 }
 
 #s-user {
   background: linear-gradient(to bottom, #51d5e6 0%, #7ceac6 100%);
+  padding-bottom: 0;
 }
 
 #s-user a {

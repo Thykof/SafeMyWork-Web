@@ -18,7 +18,46 @@
 		</div>
 	</header>
 
+	<section id="s-download">
+		<div>
+			<a href="#">
+				<h2>Download</h2>
+			</a>
+		</div>
+		<div>
+			<img src="{% static 'img/app.png' %}">
+			<img src="{% static 'img/settings.png' %}">
+		</div>
+	</section>
+
+	<section id="s-advantage">
+		<div id="d-advantage">
+			<div>
+				<h2>Simple</h2>
+			</div>
+
+			<div>
+				<h2>Helpful</h2>
+			</div>
+
+			<div>
+				<h2>Free</h2>
+		</div>
+	</section>
+
 	{% block content %}{% endblock %}
+
+	<section id="s-user">
+		<div>
+			{% if user.is_authenticated %}
+				<a href="{% url 'logout' %}">Log out</a>
+				<a href="{% url 'account' %}">Account</a>
+			{% else %}
+				<a href="{% url 'login' %}">Log in</a>
+				<a href="{% url 'signin' %}">Sign in</a>
+			{% endif %}
+		</div>
+	</section>
 
 	<footer>
 		<div>
@@ -30,11 +69,13 @@
 			<a href="https://github.com/Thykof/SafeMyWork-Web">Github - SafeMyWork-Web</a>
 		</div>
 		<div>
-			<a href="{% url 'signin' %}">Sign in</a>
+			<a href="{% url 'home' %}">Home</a>
 			<a href="{% url 'login' %}">Log in</a>
+			<a href="{% url 'signin' %}">Sign in</a>
 			<a href="{% url 'logout' %}">Log out</a>
 			<a href="{% url 'say_hello' %}">Say hello!</a>
 		</div>
+
 	</footer>
 
 </body>

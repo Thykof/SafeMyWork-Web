@@ -3,9 +3,12 @@
 {% block title %}SafeMyWork - Account{% endblock %}
 
 {% block content %}
-<section>
+<section id="s-account">
 	<div>
 		<h1>Account</h1>
+		<p>Username: {{ request.user.username }}<br>
+		Email: {{ request.user.email }}<br>
+		</p>
 	</div>
 </section>
 {% endblock %}

@@ -2,13 +2,18 @@ from django.shortcuts import render, redirect
 from django.contrib.auth import authenticate, login, logout
 from django.contrib.auth.decorators import login_required
 from django.core.urlresolvers import reverse
-
+from django.contrib.auth.models import User
 from django.http import HttpResponse
+from django.views.generic import DetailView
 
 
-from smwWeb.forms import LoginForm
+from smwWeb.forms import LoginForm, SigninForm
+from smwWeb.models import Account
 
 # Create your views here.
+
+def home(request):
+    return render(request, 'index.html')
 
 def login_view(request):
     error = False
@@ -31,7 +36,6 @@ def login_view(request):
             return redirect(member_account)
         else:
             form = LoginForm()
-            print('new form')
             return render(request, 'login.html', locals())
 
 
@@ -40,7 +44,38 @@ def logout_view(request):
     return redirect(reverse(login_view))
 
 def signin_view(request):
-    return render(request, 'index.html')
+    error = False
+
+    if request.method == "POST":
+        form = SigninForm(request.POST)
+        if form.is_valid():
+            username = form.cleaned_data["username"]
+            password = form.cleaned_data["password"]
+            password_nd = form.cleaned_data["password_nd"]
+            email = form.cleaned_data["email"]
+
+            duplicate = True
+            for user in User.objects.all():
+                if user.username.lower() == username.lower() or user.email == email:
+                    duplicate = False
+
+            if password == password_nd and duplicate:
+                user = User.objects.create_user(username, email, password)
+                account = Account(user=user)
+                account.save()
+
+                user = authenticate(username=username, password=password)
+                login(request, user)
+
+                return redirect(member_account)
+            else:
+                error = True
+        else:
+            error = True
+    else:
+        form = SigninForm()
+
+    return render(request, 'signin.html', locals())
 
 def say_hello(request):
     if request.user.is_authenticated():
