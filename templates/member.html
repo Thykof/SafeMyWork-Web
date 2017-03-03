@@ -8,6 +8,7 @@
 		<h1>Account</h1>
 		<p>Username: {{ request.user.username }}<br>
 		Email: {{ request.user.email }}<br>
+		<a href="{% url 'upload-settings' %}">Upload</a>
 		</p>
 	</div>
 </section>

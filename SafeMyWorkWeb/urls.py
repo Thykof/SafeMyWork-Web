@@ -28,5 +28,6 @@ urlpatterns = [
    	url(r'^signin/$', views.signin_view, name='signin'),
     url(r'^logout/$', views.logout_view, name='logout'),
     url(r'^account/$', views.member_account, name='account'),
-   	url(r'^say_hello/$', views.say_hello, name='say_hello'),
+    url(r'^say_hello/$', views.say_hello, name='say_hello'),
+   	url(r'^upload-settings/$', views.upload_settings, name='upload-settings'),
 ]

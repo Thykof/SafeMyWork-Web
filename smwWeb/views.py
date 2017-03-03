@@ -7,8 +7,8 @@ from django.http import HttpResponse
 from django.views.generic import DetailView
 
 
-from smwWeb.forms import LoginForm, SigninForm
-from smwWeb.models import Account
+from smwWeb.forms import LoginForm, SigninForm, SettingsFileForm
+from smwWeb.models import Account, SettingsFile
 
 # Create your views here.
 
@@ -85,3 +85,20 @@ def say_hello(request):
 @login_required()
 def member_account(request):
     return render(request, 'member.html', locals())
+
+@login_required()
+def upload_settings(request):
+    error = False
+    if request.method == "POST":
+        form = SettingsFileForm(request.POST, request.FILES)
+        if form.is_valid():
+            settings = form.cleaned_data['settings']
+
+            settings_file = SettingsFile(settings_file=settings, account=request.user.account)
+            settings_file.save()
+            return redirect('home')
+        else:
+            error = True
+    else:
+        form = SettingsFileForm()
+    return render(request, 'upload.html', locals())
