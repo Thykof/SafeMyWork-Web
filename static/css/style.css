@@ -4,7 +4,9 @@ html, body, div, span, applet, object, iframe, h1, h2, h3, h4, h5, h6, p, blockq
   border: 0;
   font-size: 100%;
   font: inherit;
+  color: inherit;
   vertical-align: baseline;
+  text-decoration: none;
 }
 article, aside, details, figcaption, figure, footer, header, hgroup, menu, nav, section {
   display: block;
@@ -31,12 +33,9 @@ table {
 body {
 	font-family: sans-serif, Arial;
 	font-size: 1em;
+  color: #353535;
 }
 
-a {
-  text-decoration: none;
-  color: inherit;
-}
 
 header, footer {
 	width: 100%;
@@ -45,24 +44,28 @@ header, footer {
 
 header {
 	background: linear-gradient(to bottom, #bfffe8 0%, #7ceac6 75%);
-  padding: 100px 0;
+  padding: 100px 0 80px;
 }
 
-
 header h1 {
-	color: white;
+	color: #034846;
 	font-size: 6em;
   margin-bottom: 100px;
   font-weight: bold;
 }
 
-header strong {
+header p {
+  border-radius: 50px;
+  padding: 15px;
+  border: solid 1px aquamarine;
+  display: inline;
   font-size: 2em;
   text-transform: uppercase;
 }
 
 section {
   padding: 20px 0;
+  background-color: #7ceac6;
 }
 
 section div { 
@@ -71,9 +74,13 @@ section div {
 	text-align: center;
 }
 
-#s-download a {
+#s-download h2 {
   font-size: 1.5em;
-  width: 0;
+  width: auto;
+  display: inline;
+  padding: 8px 10px;
+  background-color: aquamarine;
+  color: black;
 }
 
 #s-download {
@@ -82,23 +89,38 @@ section div {
 
 #s-download img {
   display: inline-block;
-  margin: 4%;
   vertical-align: middle;
+  margin: 20px;
+}
+
+#s-download div:last-child {
+  margin-top: 20px;
 }
 
 #s-advantage {
-  background: linear-gradient(to bottom, #51d5e6 0%, #7ceac6 100%);
+  background-color: #51d5e6;
   padding: 0 0 20px;
 }
 
 #d-advantage div {
   display: inline-block;
   width: auto;
-  margin: 70px 50px;
+  padding: 70px;
 }
 
 #d-advantage h2 {
   font-size: 1.5em;
+}
+
+#s-user {
+  background: linear-gradient(to bottom, #51d5e6 0%, #7ceac6 100%);
+}
+
+#s-user a {
+  display: inline-block;
+  padding: 5px;
+  font-size: 1.2em;
+  margin: 0 40px;
 }
 
 footer {
@@ -109,6 +131,7 @@ footer {
 footer div {
   display: inline-block;
   margin: 10px 20px;
+  color: black;
 }
 
 footer a, footer img {
