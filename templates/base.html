@@ -1,0 +1,35 @@
+{% load static %}
+
+ <!DOCTYPE html>
+<html>
+<head>
+	<title>{% block title %}{% endblock %}</title>
+	<meta charset="utf-8"/>
+	<link rel="stylesheet" href="{% static 'css/style.css' %}" />
+	<meta name="viewport" content="width=device-width, initial-scale=1">
+</head>
+
+<body>
+
+	<header>
+		<div>			
+			<h1>SafeMyWork</h1>
+			<p><strong>Auto save your work</strong></p>
+		</div>
+	</header>
+
+	{% block content %}{% endblock %}
+
+	<footer>
+		<div>
+			<img src="{% static 'img/logo-github.png' %}">
+			<a href="https://github.com/Thykof/SafeMyWork">Github - SafeMyWork</a>
+		</div>
+		<div>
+			<img src="{% static 'img/logo-github.png' %}">
+			<a href="https://github.com/Thykof/SafeMyWork-Web">Github - SafeMyWork-Web</a>
+		</div>
+	</footer>
+
+</body>
+</html> 

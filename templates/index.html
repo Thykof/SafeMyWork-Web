@@ -1,0 +1,33 @@
+{% extends "base.html" %}
+
+{% load static %}
+
+{% block title %}SafeMyWork - home{% endblock %}
+
+{% block content %}
+<section id="s-download">
+	<div>
+		<a href=""><h2>Download</h2></a>
+	</div>
+	<div>
+		<img src="{% static 'img/app.png' %}">
+		<img src="{% static 'img/settings.png' %}">
+	</div>
+</section>
+
+<section id="s-advantage">
+	<div id="d-advantage">
+		<div>
+			<h2>Simple</h2>
+		</div>
+
+		<div>
+			<h2>Helpful</h2>
+		</div>
+
+		<div>
+			<h2>Free</h2>
+	</div>
+</section>
+
+{% endblock %}
