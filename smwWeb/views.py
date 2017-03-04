@@ -8,9 +8,9 @@ from django.contrib.auth.models import User
 from django.core.urlresolvers import reverse
 from django.core.files.storage import default_storage
 from django.core.files import File
+from wsgiref.util import FileWrapper
 from django.conf import settings
-
-from django.http import HttpResponse  # Debug
+from django.http import HttpResponse, FileResponse
 
 
 from smwWeb.forms import LoginForm, SigninForm, SettingsFileForm
@@ -86,7 +86,8 @@ def signin_view(request):
 def say_hello(request):  # Debug
     if request.user.is_authenticated():
         return HttpResponse("Hi, {0} !".format(request.user.username))
-    return HttpResponse("Hi, anonymous.")
+    else:
+        return HttpResponse("Hi, anonymous.")
 
 @login_required()
 def member_account(request):
@@ -117,3 +118,15 @@ def upload_settings(request):
     else:
         form = SettingsFileForm()
     return render(request, 'upload.html', locals())
+
+@login_required()
+def download_settings(request):
+    src = path.join(settings.MEDIA_ROOT, 'settings', 'config_' + request.user.username + '.yml')
+    if default_storage.exists(src):
+        filename = path.basename(src)
+        wrapper = FileWrapper(open(src, 'rb'))
+        response = FileResponse(wrapper, content_type='text/yaml')
+        response['Content-Disposition'] = "attachment; filename=%s" % 'config.yml'
+        response['Content-Length'] = path.getsize(src)
+        return response
+    return redirect('account')

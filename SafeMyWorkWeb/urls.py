@@ -15,11 +15,9 @@ Including another URLconf
 """
 from django.conf.urls import url
 from django.contrib import admin
-from django.views.generic import TemplateView
 
 
 from smwWeb import views
-
 
 urlpatterns = [
     url(r'^admin24/', admin.site.urls),
@@ -29,5 +27,6 @@ urlpatterns = [
     url(r'^logout/$', views.logout_view, name='logout'),
     url(r'^account/$', views.member_account, name='account'),
     url(r'^say_hello/$', views.say_hello, name='say_hello'),
-   	url(r'^upload-settings/$', views.upload_settings, name='upload-settings'),
+    url(r'^upload-settings/$', views.upload_settings, name='upload-settings'),
+   	url(r'^download-settings/$', views.download_settings, name='download-settings'),
 ]

@@ -10,6 +10,7 @@
 		Email: {{ request.user.email }}<br>
 		Last upload: {{ last_upload }}<br>
 		<a href="{% url 'upload-settings' %}">Upload</a>
+		<a href=" {% url 'download-settings' %}">Download</a>
 		</p>
 	</div>
 </section>
