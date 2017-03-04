@@ -3,12 +3,18 @@ from django.contrib.auth.models import User
 
 # Create your models here.
 
+
 class Account(models.Model):
     user = models.OneToOneField(User)
+    upload_datetime = models.DateTimeField(null=True)
 
     def __str__(self):
-        return "Account of {0}".format(self.user.username)
+        msg = "Account of {}, ".format(self.user.username) + self.last_upload()
+        return msg
 
-class SettingsFile(models.Model):
-    account = models.OneToOneField(Account)
-    settings_file = models.FileField(upload_to='settings/')
+    def last_upload(self):
+        if self.upload_datetime:
+            msg = self.upload_datetime.strftime("%d/%m/%y")
+        else:
+             msg = "not upload yet."
+        return msg

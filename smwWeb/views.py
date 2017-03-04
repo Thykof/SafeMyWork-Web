@@ -1,14 +1,20 @@
+from os import path, remove
+import datetime
+
 from django.shortcuts import render, redirect
 from django.contrib.auth import authenticate, login, logout
 from django.contrib.auth.decorators import login_required
-from django.core.urlresolvers import reverse
 from django.contrib.auth.models import User
-from django.http import HttpResponse
-from django.views.generic import DetailView
+from django.core.urlresolvers import reverse
+from django.core.files.storage import default_storage
+from django.core.files import File
+from django.conf import settings
+
+from django.http import HttpResponse  # Debug
 
 
 from smwWeb.forms import LoginForm, SigninForm, SettingsFileForm
-from smwWeb.models import Account, SettingsFile
+from smwWeb.models import Account
 
 # Create your views here.
 
@@ -77,13 +83,14 @@ def signin_view(request):
 
     return render(request, 'signin.html', locals())
 
-def say_hello(request):
+def say_hello(request):  # Debug
     if request.user.is_authenticated():
         return HttpResponse("Hi, {0} !".format(request.user.username))
     return HttpResponse("Hi, anonymous.")
 
 @login_required()
 def member_account(request):
+    last_upload = request.user.account.last_upload()
     return render(request, 'member.html', locals())
 
 @login_required()
@@ -92,11 +99,19 @@ def upload_settings(request):
     if request.method == "POST":
         form = SettingsFileForm(request.POST, request.FILES)
         if form.is_valid():
-            settings = form.cleaned_data['settings']
+            dest = path.join(settings.MEDIA_ROOT, 'settings', 'config_' + request.user.username + '.yml')
 
-            settings_file = SettingsFile(settings_file=settings, account=request.user.account)
-            settings_file.save()
-            return redirect('home')
+            if not default_storage.exists(dest):
+                print('saving')
+                default_storage.save(dest, File(request.FILES['settings']))
+            else:
+                print('updating')
+                default_storage.delete(dest)
+                default_storage.save(dest, File(request.FILES['settings']))
+                
+            request.user.account.upload_datetime = datetime.datetime.now()
+            request.user.account.save()
+            return redirect('account')
         else:
             error = True
     else:

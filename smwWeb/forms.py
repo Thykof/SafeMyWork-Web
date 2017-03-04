@@ -2,8 +2,6 @@ from django import forms
 from django.core.files.uploadedfile import SimpleUploadedFile
 
 
-from smwWeb.models import SettingsFile
-
 class LoginForm(forms.Form):
     username = forms.CharField(label="Username", max_length=30)
     password = forms.CharField(label="Password", widget=forms.PasswordInput)

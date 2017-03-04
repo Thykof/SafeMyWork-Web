@@ -23,7 +23,7 @@ from smwWeb import views
 
 urlpatterns = [
     url(r'^admin24/', admin.site.urls),
-   	url(r'^$', views.home, name='home'),
+   	url(r'^$', views.home, name='home'),  # generic templateview
     url(r'^login/$', views.login_view, name='login'),
    	url(r'^signin/$', views.signin_view, name='signin'),
     url(r'^logout/$', views.logout_view, name='logout'),

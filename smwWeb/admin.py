@@ -2,13 +2,9 @@ from django.contrib import admin
 
 # Register your models here.
 
-from smwWeb.models import Account, SettingsFile
+from smwWeb.models import Account
 
 class AccountAdmin(admin.ModelAdmin):
-    list_display = ('user',)
-
-class SettingsFileAdmin(admin.ModelAdmin):
-	list_display = ('settings_file', 'account')
+    list_display = ('user', 'upload_datetime')
 
 admin.site.register(Account, AccountAdmin)
-admin.site.register(SettingsFile, SettingsFileAdmin)
