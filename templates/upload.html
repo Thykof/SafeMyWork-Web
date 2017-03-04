@@ -3,21 +3,21 @@
 {% block title %}SafeMyWork - Sign in{% endblock %}
 
 {% block content %}
-<section id="s-account">
-<div>
+<section>
+	<div>
 
-<h1>Upload your settings file</h1>
+		<h1>Upload your settings file</h1>
 
-{% if error %}
-	<p><strong class="stg-error">Something went wrong.</strong></p>
-{% endif %}
+		{% if error %}
+		<p><strong class="stg-error">Something went wrong.</strong></p>
+		{% endif %}
 
-<form method="post" action="." enctype="multipart/form-data">
-       {% csrf_token %}
-       {{ form.as_p }}
-    <input type="submit" value="Upload" />
-</form>
+		<form method="post" action="." enctype="multipart/form-data">
+			{% csrf_token %}
+			{{ form.as_p }}
+			<input type="submit" value="Upload" />
+		</form>
 
-</div>
+	</div>
 </section>
 {% endblock %}

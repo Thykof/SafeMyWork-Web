@@ -10,7 +10,7 @@ from django.core.files.storage import default_storage
 from django.core.files import File
 from wsgiref.util import FileWrapper
 from django.conf import settings
-from django.http import HttpResponse, FileResponse
+from django.http import FileResponse
 
 
 from smwWeb.forms import LoginForm, SigninForm, SettingsFileForm
@@ -18,10 +18,7 @@ from smwWeb.models import Account
 
 # Create your views here.
 
-def home(request):
-    return render(request, 'index.html')
-
-def login_view(request):
+def login_view(request, _):
     error = False
 
     if request.method == "POST":
@@ -36,14 +33,13 @@ def login_view(request):
             else:
                 error = True
 
-                return render(request, 'login.html', locals())
+                return render(request, "login.html", locals())
     else:
         if request.user.is_authenticated:
             return redirect(member_account)
         else:
             form = LoginForm()
-            return render(request, 'login.html', locals())
-
+            return render(request, "login.html", locals())
 
 def logout_view(request):
     logout(request)
@@ -81,18 +77,16 @@ def signin_view(request):
     else:
         form = SigninForm()
 
-    return render(request, 'signin.html', locals())
-
-def say_hello(request):  # Debug
-    if request.user.is_authenticated():
-        return HttpResponse("Hi, {0} !".format(request.user.username))
-    else:
-        return HttpResponse("Hi, anonymous.")
+    return render(request, "signin.html", locals())
 
 @login_required()
 def member_account(request):
     last_upload = request.user.account.last_upload()
-    return render(request, 'member.html', locals())
+    if default_storage.exists(path.join(settings.MEDIA_ROOT, "settings", "config_" + request.user.username + ".yml")):
+        can_download = True
+    else:
+        can_download = False
+    return render(request, "member.html", locals())
 
 @login_required()
 def upload_settings(request):
@@ -100,33 +94,32 @@ def upload_settings(request):
     if request.method == "POST":
         form = SettingsFileForm(request.POST, request.FILES)
         if form.is_valid():
-            dest = path.join(settings.MEDIA_ROOT, 'settings', 'config_' + request.user.username + '.yml')
+            dest = path.join(settings.MEDIA_ROOT, "settings", "config_" + request.user.username + ".yml")
 
             if not default_storage.exists(dest):
-                print('saving')
-                default_storage.save(dest, File(request.FILES['settings']))
+                default_storage.save(dest, File(request.FILES["settings"]))
             else:
-                print('updating')
                 default_storage.delete(dest)
-                default_storage.save(dest, File(request.FILES['settings']))
+                default_storage.save(dest, File(request.FILES["settings"]))
                 
             request.user.account.upload_datetime = datetime.datetime.now()
             request.user.account.save()
-            return redirect('account')
+            return redirect("account")
         else:
             error = True
     else:
         form = SettingsFileForm()
-    return render(request, 'upload.html', locals())
+    return render(request, "upload.html", locals())
 
 @login_required()
 def download_settings(request):
-    src = path.join(settings.MEDIA_ROOT, 'settings', 'config_' + request.user.username + '.yml')
+    src = path.join(settings.MEDIA_ROOT, "settings", "config_" + request.user.username + ".yml")
     if default_storage.exists(src):
         filename = path.basename(src)
-        wrapper = FileWrapper(open(src, 'rb'))
-        response = FileResponse(wrapper, content_type='text/yaml')
-        response['Content-Disposition'] = "attachment; filename=%s" % 'config.yml'
-        response['Content-Length'] = path.getsize(src)
+        wrapper = FileWrapper(open(src, "rb"))
+        response = FileResponse(wrapper, content_type="text/yaml")
+        response["Content-Disposition"] = "attachment; filename=config.yml"
+        response["Content-Length"] = path.getsize(src)
         return response
-    return redirect('account')
+    else:
+        return redirect("account")

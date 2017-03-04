@@ -3,15 +3,20 @@
 {% block title %}SafeMyWork - Account{% endblock %}
 
 {% block content %}
-<section id="s-account">
+<section id=s-member>
 	<div>
-		<h1>Account</h1>
-		<p>Username: {{ request.user.username }}<br>
-		Email: {{ request.user.email }}<br>
-		Last upload: {{ last_upload }}<br>
-		<a href="{% url 'upload-settings' %}">Upload</a>
+
+		<h1>Account detail</h1>
+
+		<p>Username: {{ request.user.username }}</p>
+		<p>Email: {{ request.user.email }}</p>
+		<p>Last upload: {{ last_upload }}</p>
+		<p><a href="{% url 'upload-settings' %}">Upload</a>
+		{% if can_download %}
 		<a href=" {% url 'download-settings' %}">Download</a>
+		{% endif %}
 		</p>
+
 	</div>
 </section>
 {% endblock %}

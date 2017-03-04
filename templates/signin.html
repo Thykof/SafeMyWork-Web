@@ -3,20 +3,20 @@
 {% block title %}SafeMyWork - Sign in{% endblock %}
 
 {% block content %}
-<section id="s-account">
-<div>
+<section>
+	<div>
 
-<h1>Create your account</h1>
+		<h1>Create your account</h1>
 
-{% if error %}
-	<p><strong class="stg-error">Something went wrong.</strong></p>
-{% endif %}
-<form method="post" action=".">
-       {% csrf_token %}
-       {{ form.as_p }}
-    <input type="submit" value="Sign in" />
-</form>
+		{% if error %}
+		<p><strong class="stg-error">Something went wrong.</strong></p>
+		{% endif %}
+		<form method="post" action=".">
+			{% csrf_token %}
+			{{ form.as_p }}
+			<input type="submit" value="Sign in" />
+		</form>
 
-</div>
+	</div>
 </section>
 {% endblock %}
