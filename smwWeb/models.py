@@ -4,7 +4,7 @@ from django.contrib.auth.models import User
 # Create your models here.
 
 class Account(models.Model):
-    user = models.OneToOneField(User)
+    user = models.OneToOneField(User, None)
     upload_datetime = models.DateTimeField(null=True)
 
     def __str__(self):
