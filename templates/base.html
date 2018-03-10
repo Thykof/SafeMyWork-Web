@@ -1,6 +1,6 @@
 {% load static %}
 
- <!DOCTYPE html>
+<!DOCTYPE html>
 <html>
 <head>
 	<title>{% block title %}{% endblock %}</title>
@@ -12,45 +12,53 @@
 <body>
 
 	<header>
-    <div>
-			<h1>SafeMyWork</h1>
-      <p class="feature-title"><strong>Auto save your work</strong></p>
+	<div>
+		<h1>SafeMyWork</h1>
+		<p class="feature-title"><strong>Auto save your work</strong></p>
 			<p class="feature-title"><strong>Sychronise your folders</strong></p>
 		</div>
 	</header>
 
 	<section id="s-download">
-		<div class="download">
 			<a href="https://github.com/Thykof/SafeMyWork/releases" title="github.com/Thykof/SafeMyWork/releases">
 				<h2>Download</h2>
 			</a>
+	</section>
+	<section id="s-sceenshots">
+		<div>
+  		<img src="{% static 'img/auto_save.png' %}" alt="Safe my work - auto save tab">
+  		<img src="{% static 'img/settings.png' %}" alt="Safe my work - settings">
+  		<img src="{% static 'img/sync.png' %}" alt="Safe my work - synchronise tab">
+  		<img src="{% static 'img/conflicts.png' %}" alt="Safe my work - solve conflicts">
+  		<img src="{% static 'img/confirm.png' %}" alt="Safe my work - confirmation dialog">
+  		<img src="{% static 'img/about.png' %}" alt="Safe my work - about">
 		</div>
-		<div id="screenchot">
-      <img src="{% static 'img/auto_save.png' %}" alt="Safe my work - auto save tab">
-      <img src="{% static 'img/settings.png' %}" alt="Safe my work - settings">
-      <img src="{% static 'img/sync.png' %}" alt="Safe my work - synchronise tab">
-      <img src="{% static 'img/conflicts.png' %}" alt="Safe my work - solve conflicts">
-			<img src="{% static 'img/confirm.png' %}" alt="Safe my work - confirmation dialog">
-			<img src="{% static 'img/about.png' %}" alt="Safe my work - about">
-		</div>
+	<div>
+		<picture>
+		<source media="(min-width: 650px)" srcset="">
+		<source media="(min-width: 465px)" srcset="">
+		<img src="" alt="safe my work screenshot" style="width:auto;">
+		</picture>
+	</div>
 	</section>
 
 	<section id="s-advantage">
-		<div id="d-advantage">
-			<div>
-				<h2>Simple</h2>
-        <p>Select your working folders</p>
-			</div>
-
-			<div>
-				<h2>Helpful</h2>
-        <p>Created to avoid losing documents.</p>
-			</div>
-
-			<div>
-				<h2>Free</h2>
-        <p>Free and <a href="https://github.com/Thykof/SafeMyWork">Open source</a> software.</p>
+	<div id="d-advantage">
+		<div>
+			<h2>Simple</h2>
+		<p>Select your working folders</p>
 		</div>
+
+		<div>
+			<h2>Helpful</h2>
+		<p>Created to avoid losing documents.</p>
+		</div>
+
+		<div>
+			<h2>Free</h2>
+		<p>Free and <a href="https://github.com/Thykof/SafeMyWork">Open source</a> software.</p>
+		</div>
+	</div>
 	</section>
 
 	<section id="s-user">

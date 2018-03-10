@@ -107,20 +107,14 @@ section h1 {
 
 #s-download {
   background: linear-gradient(to bottom, #7ceac6 0%, #51d5e6 100%);
+  margin: auto;
+	text-align: center;
 }
 
-#s-download img {
+#s-sceenshots img {
   display: inline-block;
   vertical-align: middle;
   margin: 10px;
-}
-
-#s-download div:last-child {
-  margin-top: 20px;
-}
-
-div.download {
-  margin-bottom: 50px;
 }
 
 #s-advantage {
