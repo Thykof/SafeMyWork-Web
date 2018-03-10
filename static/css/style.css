@@ -64,7 +64,7 @@ header p {
 }
 
 
-section div { 
+section div {
 	width: 80%;
 	margin: auto;
 	text-align: center;
@@ -81,6 +81,10 @@ strong.error {
 section h1 {
   font-size: 1.5em;
   margin-bottom: 10px;
+}
+
+.feature-title {
+  display: inline-block;
 }
 
 #s-member p:last-child {
@@ -113,6 +117,10 @@ section h1 {
 
 #s-download div:last-child {
   margin-top: 20px;
+}
+
+div.download {
+  margin-bottom: 50px;
 }
 
 #s-advantage {
