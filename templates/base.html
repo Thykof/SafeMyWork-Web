@@ -10,12 +10,11 @@
 </head>
 
 <body>
-
 	<header>
-	<div>
-		<h1>SafeMyWork</h1>
-		<p class="feature-title"><strong>Auto save your work</strong></p>
-			<p class="feature-title"><strong>Sychronise your folders</strong></p>
+		<div>
+			<h1>SafeMyWork</h1>
+				<p class="feature-title"><strong>Auto save your work</strong></p>
+				<p class="feature-title"><strong>Sychronise your folders</strong></p>
 		</div>
 	</header>
 
@@ -24,22 +23,39 @@
 				<h2>Download</h2>
 			</a>
 	</section>
-	<section id="s-sceenshots">
-		<div>
-  		<img src="{% static 'img/auto_save.png' %}" alt="Safe my work - auto save tab">
-  		<img src="{% static 'img/settings.png' %}" alt="Safe my work - settings">
-  		<img src="{% static 'img/sync.png' %}" alt="Safe my work - synchronise tab">
-  		<img src="{% static 'img/conflicts.png' %}" alt="Safe my work - solve conflicts">
-  		<img src="{% static 'img/confirm.png' %}" alt="Safe my work - confirmation dialog">
-  		<img src="{% static 'img/about.png' %}" alt="Safe my work - about">
+	<section id="s-screenshots">
+		<div id="d-screenshots">
+			<h2>Automatic save your work.</h2>
+			<div>
+				<p><span>SafeMyWork</span> copies your working folders to a safe directory.</p>
+  			<img src="{% static 'img/auto_save.png' %}" alt="Safe my work - auto save tab">
+			</div>
+			<div>
+				<p>You can specify some rules.</p>
+				<img src="{% static 'img/settings.png' %}" alt="Safe my work - settings">
+			</div>
+			<h2>Synchronise folders</h2>
+			<div>
+				<p><span>SafeMyWork</span> scans and synchronises two folders.</p>
+  			<img src="{% static 'img/sync.png' %}" alt="Safe my work - synchronise tab">
+			</div>
+			<div>
+				<p>You can choose which file to keep when there is the two same files in both folders.</p>
+  			<img src="{% static 'img/conflicts.png' %}" alt="Safe my work - solve conflicts">
+			</div>
+			<div>
+				<p>Recap before apply the changes.</p>
+  			<img src="{% static 'img/confirm.png' %}" alt="Safe my work - confirmation dialog">
+			</div>
+  		<!-- <img src="{% static 'img/about.png' %}" alt="Safe my work - about"> -->
 		</div>
-	<div>
+	<!--<div>
 		<picture>
-		<source media="(min-width: 650px)" srcset="">
-		<source media="(min-width: 465px)" srcset="">
-		<img src="" alt="safe my work screenshot" style="width:auto;">
+			<source media="(min-width: 650px)" srcset="">
+			<source media="(min-width: 465px)" srcset="">
+			<img src="" alt="safe my work screenshot" style="width:auto;">
 		</picture>
-	</div>
+	</div>-->
 	</section>
 
 	<section id="s-advantage">
