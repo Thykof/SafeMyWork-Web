@@ -49,7 +49,7 @@ header {
 
 header h1 {
 	color: #034846;
-	font-size: 6em;
+  font-size: 10vw;
   margin-bottom: 100px;
   font-weight: bold;
 }
