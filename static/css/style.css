@@ -118,7 +118,7 @@ section h1 {
 #s-screenshots img {
   display: inline-block;
   vertical-align: middle;
-  margin: 10px;
+  max-width: 97%;
 }
 
 #d-screenshots {
