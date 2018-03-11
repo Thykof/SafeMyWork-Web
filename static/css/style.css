@@ -121,6 +121,11 @@ section h1 {
   max-width: 97%;
 }
 
+#s-screenshots span {
+  color: #034846;
+  font-weight: 600;
+}
+
 #d-screenshots {
   width: auto;
 }
