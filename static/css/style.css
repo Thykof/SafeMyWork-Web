@@ -100,7 +100,7 @@ section h1 {
   margin: 0 15px;
 }
 
-#s-download h2 {
+#s-download strong {
   font-size: 1.5em;
   width: auto;
   display: inline;
