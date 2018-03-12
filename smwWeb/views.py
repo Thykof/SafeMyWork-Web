@@ -109,29 +109,32 @@ def upload_settings(request):
             content_type_ok = upload_file.content_type == 'application/x-yaml'
             size_ok = upload_file.size < 1000
             if filename_ok and content_type_ok and size_ok:
-                for line in upload_file:
                 open_file = upload_file.open()
-                config = yaml.load(open_file)
-                nb_item = 0
-                valid_items = ['timedelta', 'extention', 'advanced', 'delicate_dirs', 'safe_dir', 'filename', 'dirpath', 'external_path', 'dirname', 'local_path']
-                for item in config:
-                    plus = 1 if item in valid_items else -1
-                    nb_item += plus
-                content_ok = nb_item == len(valid_items)
-                if content_ok:
-                    dest = path.join(settings.MEDIA_ROOT, "settings", "config_" + request.user.username + ".yml")
-
-                    if not default_storage.exists(dest):
-                        default_storage.save(dest, File(request.FILES["settings"]))
-                    else:
-                        default_storage.delete(dest)
-                        default_storage.save(dest, File(request.FILES["settings"]))
-
-                    request.user.account.upload_datetime = datetime.datetime.now()
-                    request.user.account.save()
-                    return redirect(member_account)
-                else:
+                try:
+                    config = yaml.load(open_file)
+                except:
                     error = True
+                else:
+                    nb_item = 0
+                    valid_items = ['timedelta', 'extention', 'advanced', 'delicate_dirs', 'safe_dir', 'filename', 'dirpath', 'external_path', 'dirname', 'local_path']
+                    for item in config:
+                        plus = 1 if item in valid_items else -1
+                        nb_item += plus
+                    content_ok = nb_item == len(valid_items)
+                    if content_ok:
+                        dest = path.join(settings.MEDIA_ROOT, "settings", "config_" + request.user.username + ".yml")
+
+                        if not default_storage.exists(dest):
+                            default_storage.save(dest, File(request.FILES["settings"]))
+                        else:
+                            default_storage.delete(dest)
+                            default_storage.save(dest, File(request.FILES["settings"]))
+
+                        request.user.account.upload_datetime = datetime.datetime.now()
+                        request.user.account.save()
+                        return redirect(member_account)
+                    else:
+                        error = True
             else:
                 error = True
         else:
