@@ -112,9 +112,11 @@ def upload_settings(request):
             content_type_ok = upload_file.content_type == 'application/x-yaml'
             size_ok = upload_file.size < 1000
             if filename_ok and content_type_ok and size_ok:
-                open_file = upload_file.open()
+                content = ''
+                for line in upload_file:
+                    content += line.decode()
                 try:
-                    config = yaml.load(open_file)
+                    config = yaml.load(content)
                 except yaml.parser.ParserError:
                     error = 'enable to load yml file'
                 else:
