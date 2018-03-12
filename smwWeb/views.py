@@ -1,4 +1,4 @@
-from os import path, remove
+from os import path
 import datetime
 
 from django.shortcuts import render, redirect
@@ -115,7 +115,7 @@ def upload_settings(request):
                 open_file = upload_file.open()
                 try:
                     config = yaml.load(open_file)
-                except:
+                except yaml.parser.ParserError:
                     error = 'enable to load yml file'
                 else:
                     nb_item = 0
@@ -150,7 +150,6 @@ def upload_settings(request):
 def download_settings(request):
     src = path.join(settings.MEDIA_ROOT, "settings", "config_" + request.user.username + ".yml")
     if default_storage.exists(src):
-        filename = path.basename(src)
         wrapper = FileWrapper(open(src, "rb"))
         response = FileResponse(wrapper, content_type="text/yaml")
         response["Content-Disposition"] = "attachment; filename=config.yml"
