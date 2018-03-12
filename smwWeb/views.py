@@ -18,7 +18,7 @@ from smwWeb.models import Account
 
 # Create your views here.
 
-def login_view(request, _):
+def login_view(request):
     error = False
 
     if request.method == "POST":
