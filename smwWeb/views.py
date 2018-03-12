@@ -56,7 +56,7 @@ def logout_view(request):
     return redirect(reverse(home))
 
 def signin_view(request):
-    error = False
+    error = ''
 
     if request.method == "POST":
         form = SigninForm(request.POST)
@@ -66,24 +66,27 @@ def signin_view(request):
             password_nd = form.cleaned_data["password_nd"]
             email = form.cleaned_data["email"]
 
-            duplicate = True
+            duplicate = False
             for user in User.objects.all():
                 if user.username.lower() == username.lower() or user.email == email:
-                    duplicate = False
+                    duplicate = True
 
-            if password == password_nd and duplicate:
-                user = User.objects.create_user(username, email, password)
-                account = Account(user=user)
-                account.save()
+            if password == password_nd:
+                if not duplicate:
+                    user = User.objects.create_user(username, email, password)
+                    account = Account(user=user)
+                    account.save()
 
-                user = authenticate(username=username, password=password)
-                login(request, user)
+                    user = authenticate(username=username, password=password)
+                    login(request, user)
 
-                return redirect(member_account)
+                    return redirect(member_account)
+                else:
+                    error = 'Username or email unavailable'
             else:
-                error = True
+                error = 'invalid 2nd password'
         else:
-            error = True
+            error = 'invalid form'
     else:
         form = SigninForm()
 
@@ -100,7 +103,7 @@ def member_account(request):
 
 @login_required()
 def upload_settings(request):
-    error = False
+    error = ''
     if request.method == "POST":
         form = SettingsFileForm(request.POST, request.FILES)
         if form.is_valid():
@@ -113,7 +116,7 @@ def upload_settings(request):
                 try:
                     config = yaml.load(open_file)
                 except:
-                    error = True
+                    error = 'enable to load yml file'
                 else:
                     nb_item = 0
                     valid_items = ['timedelta', 'extention', 'advanced', 'delicate_dirs', 'safe_dir', 'filename', 'dirpath', 'external_path', 'dirname', 'local_path']
@@ -134,11 +137,11 @@ def upload_settings(request):
                         request.user.account.save()
                         return redirect(member_account)
                     else:
-                        error = True
+                        error = 'invalid content'
             else:
-                error = True
+                error = 'invalid file'
         else:
-            error = True
+            error = 'invalid form'
     else:
         form = SettingsFileForm()
     return render(request, "upload.html", locals())
