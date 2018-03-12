@@ -18,8 +18,17 @@ from smwWeb.models import Account
 
 # Create your views here.
 
-def login_view(request):
+def home(request):
+    if request.user.is_authenticated:
+        return redirect(member_account)
+    else:
+        form = LoginForm()
+        home = True
+        return render(request, "login.html", locals())  # url: /
+
+def login_view(request):  # url: /login
     error = False
+    home = False
 
     if request.method == "POST":
         form = LoginForm(request.POST)
@@ -43,7 +52,7 @@ def login_view(request):
 
 def logout_view(request):
     logout(request)
-    return redirect(reverse(login_view))
+    return redirect(reverse(home))
 
 def signin_view(request):
     error = False
@@ -104,7 +113,7 @@ def upload_settings(request):
 
             request.user.account.upload_datetime = datetime.datetime.now()
             request.user.account.save()
-            return redirect("account")
+            return redirect(member_account)
         else:
             error = True
     else:
@@ -122,4 +131,4 @@ def download_settings(request):
         response["Content-Length"] = path.getsize(src)
         return response
     else:
-        return redirect("account")
+        return redirect(member_account)

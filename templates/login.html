@@ -11,7 +11,10 @@
 		{% if error %}
 		<p class="member"><strong class="error">Something went wrong.</strong></p>
 		{% endif %}
-		<form method="post" action=".">
+		{% if not home %}
+		<div style="display: none;" class="member"></div>  <!-- jquery scroll -->
+		{% endif %}
+		<form method="post" action="{% url 'login' %}">
 			{% csrf_token %}
 			{{ form.as_p }}
 			<input type="submit" value="Log in" />
