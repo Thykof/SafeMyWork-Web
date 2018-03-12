@@ -1,5 +1,5 @@
 $(document).ready(function($) {
-  if ($('#a-account').html() == 'Account'){
+  if (typeof($('.member').html()) !== 'undefined') {
     dest = $('#s-user').offset().top;
     $('html,body').animate({scrollTop:dest}, 0);
   }
