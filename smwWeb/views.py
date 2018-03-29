@@ -82,7 +82,7 @@ def signin_view(request):
 
                     return redirect(member_account)
                 else:
-                    error = 'Username or email unavailable'
+                    error = 'username or email unavailable'
             else:
                 error = 'invalid 2nd password'
         else:
@@ -121,7 +121,16 @@ def upload_settings(request):
                     error = 'enable to load yml file'
                 else:
                     nb_item = 0
-                    valid_items = ['timedelta', 'extention', 'advanced', 'delicate_dirs', 'safe_dir', 'filename', 'dirpath', 'external_path', 'dirname', 'local_path']
+                    valid_items = ['timedelta',
+                                   'extention',
+                                   'advanced',
+                                   'delicate_dirs',
+                                   'safe_dir',
+                                   'filename',
+                                   'dirpath',
+                                   'external_path',
+                                   'dirname',
+                                   'local_path']
                     for item in config:
                         plus = 1 if item in valid_items else -1
                         nb_item += plus

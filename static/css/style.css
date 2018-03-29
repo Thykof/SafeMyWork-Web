@@ -170,6 +170,17 @@ section {
   margin: 0 40px;
 }
 
+input {
+  padding: 4px;
+  color: black;
+  border: none;
+  border-radius: 2px;
+}
+
+input[type="submit"] {
+  background-color: inherit;
+}
+
 footer {
   background: linear-gradient(to bottom, #7ceac6 0%, #23a47a 100%);
   padding: 80px 0 50px;
